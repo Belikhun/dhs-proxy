@@ -1,0 +1,25 @@
+version: 2.0
+
+jobs:
+  build:
+    working_directory: ~/project
+    
+    docker:
+      - image: circleci/python:3.8.5
+
+    steps:
+      - checkout:
+          path: ~/project
+
+      - run: sudo apt update
+
+      - run:
+          name: Build 🏗
+          working_directory: ~/project
+          command:
+            export PYTHONPATH="$PWD"
+            python3 build/build.py
+      - run:
+          name: Deploy 🚀
+          working_directory: ~/project/build
+          command: ./deploy.sh

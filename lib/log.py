@@ -11,10 +11,15 @@ from inspect import currentframe
 import atexit
 import time
 import re
+import os
 
 #init
 init(autoreset=True)
 sticks = time.time()
+
+if (not os.path.isdir("logs/")):
+	os.mkdir("logs/")
+
 logPath = f"logs/{(int)(sticks * 10000)}.log"
 
 def escape_ansi(line):
