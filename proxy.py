@@ -438,17 +438,16 @@ class RequestHandler(BaseHTTPRequestHandler):
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
 	pass
 
-if __name__ == "__main__":
+#* MAIN
+DATAIP = getIP()
 
-	DATAIP = getIP()
+webServer = ThreadedHTTPServer((WIFIADDR, PORT), RequestHandler)
+log("OKAY", f"Máy chủ đang chạy tại {WIFIADDR}:{PORT}")
 
-	webServer = ThreadedHTTPServer((WIFIADDR, PORT), RequestHandler)
-	log("OKAY", f"Máy chủ đang chạy tại {WIFIADDR}:{PORT}")
+try:
+	webServer.serve_forever()
+except KeyboardInterrupt:
+	pass
 
-	try:
-		webServer.serve_forever()
-	except KeyboardInterrupt:
-		pass
-
-	webServer.server_close()
-	log("OKAY", f"Máy chủ đã đóng")
+webServer.server_close()
+log("OKAY", f"Máy chủ đã đóng")
