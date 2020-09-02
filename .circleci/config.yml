@@ -5,7 +5,7 @@ jobs:
     working_directory: ~/project
     
     docker:
-      - image: circleci/python:3.8.5
+      - image: circleci/buildpack-deps:bionic
 
     steps:
       - checkout:
@@ -14,6 +14,8 @@ jobs:
       - run: |
           sudo apt update
           sudo apt install dos2unix
+          sudo apt install python3
+          sudo apt install python3-pip
 
       - run:
           name: Install Dependencies
@@ -34,4 +36,4 @@ jobs:
           working_directory: ~/project/build
           command: |
             dos2unix deploy.sh
-            sudo ./deploy.sh
+            ./deploy.sh
