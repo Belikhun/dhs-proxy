@@ -26,14 +26,14 @@ rm -rf $tmpdir/.git
 rm -rf $tmpdir/logs
 rm -f $tmpdir/proxy.py
 cd ..
-rm -rf dealHunterSuiteBackend
+rm -rf dealHunterSuiteProxyServerBuild
 
 echo -e " \033[1;37m* \033[1;34mGIT INITIALIZING"
 
 git config --global user.email "belivipro9x99@gmail.com"
 git config --global user.name "Belikhun"
 git clone https://belivipro9x99:${GH_TOKEN}@github.com/belivipro9x99/dealHunterSuiteProxyServerBuild.git
-cd dealHunterSuiteBackend
+cd dealHunterSuiteProxyServerBuild
 git checkout -b master
 git reset --hard origin/master
 git rm -rf . > /dev/null
