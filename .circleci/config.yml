@@ -16,9 +16,8 @@ jobs:
       - run:
           name: Build 🏗
           working_directory: ~/project
-          environment:
-            PYTHONPATH: PWD
           command: |
+            echo 'export PYTHONPATH="$PWD"' >> $BASH_ENV
             echo ${PYTHONPATH}
             python3 build/build.py
       - run:
