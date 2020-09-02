@@ -16,10 +16,9 @@ jobs:
       - run:
           name: Build 🏗
           working_directory: ~/project
-          command: |
-            echo 'export PYTHONPATH=$PWD:$PATH' >> $BASH_ENV
-            echo ${CIRCLE_WORKING_DIRECTORY}
-            echo ${PYTHONPATH}
+          environment:
+            PYTHONPATH: ~/project
+          command:
             python3 build/build.py
       - run:
           name: Deploy 🚀
