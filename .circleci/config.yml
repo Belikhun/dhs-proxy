@@ -11,7 +11,9 @@ jobs:
       - checkout:
           path: ~/project
 
-      - run: sudo apt update
+      - run:
+          sudo apt update
+          sudo apt install dos2unix
 
       - run:
           name: Install Dependencies
@@ -30,4 +32,6 @@ jobs:
       - run:
           name: Deploy 🚀
           working_directory: ~/project/build
-          command: ./deploy.sh
+          command: |
+            dos2unix deploy.sh
+            ./deploy.sh
