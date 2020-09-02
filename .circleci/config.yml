@@ -5,7 +5,7 @@ jobs:
     working_directory: ~/project
     
     docker:
-      - image: circleci/buildpack-deps:bionic
+      - image: circleci/python:latest
 
     steps:
       - checkout:
@@ -16,8 +16,6 @@ jobs:
           command: |
             sudo apt update
             sudo apt install dos2unix
-            sudo apt install python3
-            sudo apt install python3-pip
             pip3 install colorama
             pip3 install gitpython
 
