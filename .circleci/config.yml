@@ -34,4 +34,4 @@ jobs:
           working_directory: ~/project/build
           command: |
             dos2unix deploy.sh
-            ./deploy.sh
+            sudo ./deploy.sh
