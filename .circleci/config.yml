@@ -14,14 +14,18 @@ jobs:
       - run: sudo apt update
 
       - run:
+          name: Install Dependencies
+          command: |
+            pip3 install colorama
+            pip3 install gitpython
+
+      - run:
           name: Build 🏗
           working_directory: ~/project
           command: |
             echo 'export PYTHONPATH=$PWD' >> $BASH_ENV
             source $BASH_ENV
-            
-            echo ${CIRCLE_WORKING_DIRECTORY}
-            echo ${PYTHONPATH}
+
             python3 build/build.py
       - run:
           name: Deploy 🚀
