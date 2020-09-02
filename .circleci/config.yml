@@ -11,15 +11,13 @@ jobs:
       - checkout:
           path: ~/project
 
-      - run: |
-          sudo apt update
-          sudo apt install dos2unix
-          sudo apt install python3
-          sudo apt install python3-pip
-
       - run:
           name: Install Dependencies
           command: |
+            sudo apt update
+            sudo apt install dos2unix
+            sudo apt install python3
+            sudo apt install python3-pip
             pip3 install colorama
             pip3 install gitpython
 
@@ -36,4 +34,5 @@ jobs:
           working_directory: ~/project/build
           command: |
             dos2unix deploy.sh
+            sudo chmod u+x deploy.sh
             ./deploy.sh
