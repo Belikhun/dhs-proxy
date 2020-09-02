@@ -11,7 +11,7 @@ jobs:
       - checkout:
           path: ~/project
 
-      - run:
+      - run: |
           sudo apt update
           sudo apt install dos2unix
 
