@@ -5,6 +5,7 @@
 #? |  Licensed under the MIT License. See LICENSE in the project root for license information.     |
 #? |-----------------------------------------------------------------------------------------------|
 
+from update import logStatus
 import lib.ehook
 from lib.log import log
 
@@ -33,17 +34,14 @@ log("OKAY", "Imported: pycurl")
 from io import BytesIO
 log("OKAY", "Imported: io.BytesIO")
 
-import asyncio
-log("OKAY", "Imported: asyncio")
-
 import psutil
 log("OKAY", "Imported: psutil")
 
 from urllib.parse import urlencode
 log("OKAY", "Imported: urllib.parse.urlencode")
 
-import websockets
-log("OKAY", "Imported: websockets")
+import subprocess
+log("OKAY", "Imported: subprocess")
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 log("OKAY", "Imported: http.server")
@@ -64,6 +62,9 @@ if (sys.platform not in ["linux", "linux2", "darwin"]):
 	exit(-1)
 
 TIMEOUT = 5
+
+def execute(command, executable="sudo"):
+	subprocess.run(f"{executable} {command}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 #> Get Wifi and SIM interfaces
 
@@ -441,8 +442,13 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
 #* MAIN
 DATAIP = getIP()
 
+logStatus("Tìm và tắt máy chủ đang chạy", 0)
+execute(f"kill -9 $(sudo lsof -t -i:{PORT})")
+logStatus("Tìm và tắt máy chủ đang chạy", 1, True)
+
+logStatus("Khởi động máy chủ", 0)
 webServer = ThreadedHTTPServer((WIFIADDR, PORT), RequestHandler)
-log("OKAY", f"Máy chủ đang chạy tại {WIFIADDR}:{PORT}")
+logStatus(f"Máy chủ đang chạy tại {WIFIADDR}:{PORT}", 1, True)
 
 try:
 	webServer.serve_forever()
