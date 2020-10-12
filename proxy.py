@@ -5,9 +5,9 @@
 #? |  Licensed under the MIT License. See LICENSE in the project root for license information.     |
 #? |-----------------------------------------------------------------------------------------------|
 
-from update import logStatus
 import lib.ehook
 from lib.log import log
+from colorama import init, Fore
 
 #> Main Import
 import sys
@@ -65,6 +65,10 @@ TIMEOUT = 5
 
 def execute(command, executable="sudo"):
 	subprocess.run(f"{executable} {command}", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+def logStatus(text, status, overWrite = False):
+	statusText = [f"{Fore.RED}✗ ERRR", f"{Fore.YELLOW}● WAIT", f"{Fore.GREEN}✓ OKAY"]
+	log("INFO", "{:66}{}{}".format(text, statusText[status + 1], Fore.RESET), resetCursor = (not overWrite))
 
 #> Get Wifi and SIM interfaces
 
