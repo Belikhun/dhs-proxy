@@ -84,7 +84,7 @@ for interface in ifLists:
 				WIFIIFACE = interface
 				log("OKAY", f"Đã tìm thấy Wifi Interface: {interface} ({WIFIADDR})")
 
-			elif (not DATAIFACE and ("rmnet_data" in interface)):
+			elif (not DATAIFACE and ("rmnet_data" in interface or "rmnet" in interface)):
 				DATAADDR = addr.address
 				DATAIFACE = interface
 				log("OKAY", f"Đã tìm thấy Data Interface: {interface} ({DATAADDR})")
