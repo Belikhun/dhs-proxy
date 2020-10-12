@@ -447,8 +447,12 @@ class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
 DATAIP = getIP()
 
 logStatus("Tìm và tắt máy chủ đang chạy", 0)
-execute(f"kill -9 $(sudo lsof -t -i:{PORT})")
-logStatus("Tìm và tắt máy chủ đang chạy", 1, True)
+
+try:
+	execute(f"kill -9 $(sudo lsof -t -i:{PORT})")
+	logStatus("Tìm và tắt máy chủ đang chạy", 1, True)
+except:
+	logStatus("Tìm và tắt máy chủ đang chạy", -1, True)
 
 logStatus("Khởi động máy chủ", 0)
 webServer = ThreadedHTTPServer((WIFIADDR, PORT), RequestHandler)
