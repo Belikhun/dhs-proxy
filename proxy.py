@@ -247,7 +247,8 @@ class RequestHandler(BaseHTTPRequestHandler):
 
 		if ("type" in jsonData):
 			if (jsonData["type"] == "data"):
-				headers.append(f"Content-Type: multipart/form-data")
+				# headers.append(f"Content-Type: multipart/form-data")
+				pass
 			elif (jsonData["type"] == "json"):
 				headers.append(f"Content-Type: application/json")
 			else:
